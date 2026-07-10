@@ -98,5 +98,4 @@ export const commands = [
   { command: "projects", description: "Open featured products" },
   { command: "education", description: "Show academic background" },
   { command: "contact", description: "Reveal contact details" },
-  { command: "currently", description: "Show current focus" },
 ];

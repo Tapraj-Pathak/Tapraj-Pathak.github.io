@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
 import {
   ArrowRight,
+  Copy,
   Download,
   Mail,
   MapPin,
@@ -33,10 +34,6 @@ import {
 
 const initialTerminalOutput = [
   { label: "whoami", value: "Tapraj\nComputer Engineering Student\nNepal" },
-  // {
-  //   label: "currently",
-  //   value: "Preparing for hackathons\nLearning Solidity\nBuilding AI products",
-  // },
   {
     label: "ls projects",
     value:
@@ -58,6 +55,7 @@ const App = () => {
   });
   const [contactStatus, setContactStatus] = useState("idle");
   const [contactFeedback, setContactFeedback] = useState("");
+  const [copyFeedback, setCopyFeedback] = useState("");
   const [isDarkMode, setIsDarkMode] = useState(() => {
     if (typeof window === "undefined") return true;
 
@@ -124,6 +122,8 @@ const App = () => {
   }, [isDarkMode]);
 
   const currentTerminal = initialTerminalOutput[terminalIndex];
+  const contactEmail =
+    import.meta.env.VITE_CONTACT_EMAIL || "taprajpathak111@gmail.com";
   const heroStats = useMemo(
     () => [
       { label: "Hackathons", value: "3+" },
@@ -132,6 +132,14 @@ const App = () => {
     ],
     [],
   );
+
+  const handleCopyEmail = async () => {
+    if (typeof navigator !== "undefined" && navigator.clipboard?.writeText) {
+      await navigator.clipboard.writeText(contactEmail);
+      setCopyFeedback("Copied to clipboard");
+      window.setTimeout(() => setCopyFeedback(""), 2200);
+    }
+  };
 
   const handleCommand = (event) => {
     event.preventDefault();
@@ -201,6 +209,11 @@ const App = () => {
           style={{ scaleX: scrollProgress }}
           className="fixed inset-x-0 top-0 z-50 h-1 origin-left bg-linear-to-r from-cyan-400 via-fuchsia-500 to-violet-500"
         />
+        {copyFeedback && (
+          <div className="fixed bottom-6 right-6 z-50 rounded-2xl border border-zinc-200/80 bg-white/95 px-4 py-3 text-sm text-zinc-900 shadow-lg shadow-zinc-900/10 backdrop-blur dark:border-zinc-800/80 dark:bg-zinc-950/95 dark:text-zinc-100">
+            {copyFeedback}
+          </div>
+        )}
 
         <header className="sticky top-0 z-40 border-b border-zinc-200/80 bg-white/70 backdrop-blur-xl dark:border-zinc-800/80 dark:bg-zinc-950/70">
           <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
@@ -222,13 +235,6 @@ const App = () => {
               ))}
             </nav>
             <div className="flex items-center gap-2">
-              {/* <button
-                onClick={() => setPaletteOpen(true)}
-                className="hidden rounded-full border border-zinc-300 p-2 text-zinc-700 transition hover:border-zinc-400 hover:bg-zinc-100 md:inline-flex dark:border-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-900"
-                aria-label="Open command palette"
-              >
-                <TerminalSquare size={16} />
-              </button> */}
               <button
                 type="button"
                 onClick={() => setIsDarkMode((value) => !value)}
@@ -690,12 +696,22 @@ const App = () => {
                   description="I am open to collaborations, internships, and thoughtful product ideas."
                 />
                 <div className="space-y-3 text-sm text-zinc-600 dark:text-zinc-400">
-                  <a
-                    href="mailto:tapraj@example.com"
-                    className="flex items-center gap-3 rounded-2xl border border-zinc-200/70 px-4 py-3 transition hover:bg-zinc-50 dark:border-zinc-800 dark:hover:bg-zinc-900"
-                  >
-                    <Mail size={16} /> tapraj@example.com
-                  </a>
+                  <div className="flex items-center justify-between gap-3 rounded-2xl border border-zinc-200/70 px-4 py-3 transition hover:bg-zinc-50 dark:border-zinc-800 dark:hover:bg-zinc-900">
+                    <a
+                      href={`mailto:${contactEmail}`}
+                      className="flex items-center gap-3"
+                    >
+                      <Mail size={16} /> {contactEmail}
+                    </a>
+                    <button
+                      type="button"
+                      onClick={handleCopyEmail}
+                      className="rounded-full p-2 text-zinc-500 transition hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-white"
+                      aria-label="Copy email address"
+                    >
+                      <Copy size={16} className="cursor-pointer" />
+                    </button>
+                  </div>
                   <a
                     href="https://github.com/"
                     className="flex items-center gap-3 rounded-2xl border border-zinc-200/70 px-4 py-3 transition hover:bg-zinc-50 dark:border-zinc-800 dark:hover:bg-zinc-900"
@@ -806,7 +822,7 @@ const App = () => {
           onSelect={(target) => {
             setPaletteOpen(false);
             if (target === "email") {
-              navigator.clipboard?.writeText("tapraj@example.com");
+              navigator.clipboard?.writeText(contactEmail);
             } else {
               document
                 .getElementById(target)
