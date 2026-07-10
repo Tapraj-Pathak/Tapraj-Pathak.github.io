@@ -55,41 +55,109 @@ export const skills = [
 
 export const projects = [
   {
-    title: "Mock Project",
+    title: "Portfolio Website",
     description:
-      "A temporary placeholder project entry while real case studies are being prepared.",
-    stack: ["React", "Node.js"],
-    status: "Coming soon",
-    github: "#",
+      "A personal portfolio website built with React, Node.js,Express js, MongoDB, and Tailwind CSS showcasing my projects, skills, and contact information.",
+    stack: ["React", "Node.js", "Express.js", "MongoDB", "Tailwind CSS"],
+    status: "Live",
+    github: "https://github.com/Tapraj-Pathak/Tapraj-Pathak.github.io",
+    demo: "/",
+    accent: "from-slate-500/30 to-slate-600/20",
+  },
+  {
+    title: "Chat Application",
+    description: "A real-time chat application built with React and Socket.IO.",
+    stack: ["React", "Socket.IO", "Node.js", "MongoDB"],
+    status: "Live soon",
+    github: "https://github.com/Tapraj-Pathak/Chat-App",
+    demo: "#",
+    accent: "from-slate-500/30 to-slate-600/20",
+  },
+  {
+    title: "Smart Saauji",
+    description: "Turn-key inventory and insights app for small retailers. ",
+    stack: ["React", "Node.js", "Express.js", "MongoDB", "Tailwind CSS"],
+    status: "In Progress",
+    github: "https://github.com/Tapraj-Pathak/Smart-saauji",
+    demo: "#",
+    accent: "from-slate-500/30 to-slate-600/20",
+  },
+  {
+    title: "Queue Zero",
+    description: "A real-time queue management system for hospitals.",
+    stack: ["React", "Node.js", "Express.js", "MongoDB", "Tailwind CSS"],
+    status: "Live soon",
+    github: "https://github.com/Tapraj-Pathak/Queue-Zero",
+    demo: "#",
+    accent: "from-slate-500/30 to-slate-600/20",
+  },
+  {
+    title: "Kyc Verification System",
+    description: "A secure and efficient system for verifying user identities.",
+    stack: [
+      "React",
+      "Node.js",
+      "Express.js",
+      "MongoDB",
+      "OpenCV",
+      "Tailwind CSS",
+    ],
+    status: "Live soon",
+    github: "https://github.com/Tapraj-Pathak/Kyc-Verification-System",
     demo: "#",
     accent: "from-slate-500/30 to-slate-600/20",
   },
 ];
 
 export const timeline = [
-  "Building out portfolio content",
-  "Preparing more polished project stories",
-  "Shaping future ideas and experiments",
+  "2025 - Present: Pursuing Bachelor's in Computer Science at Tribhuvan University",
+  "I will write it later....\n......\n........\n........\n........\n........\n........\n........\n........\n........\n........\n........\n........\n........\n........\n........\n........\n........\n........\n........\n........\n........\n........\n........\n........\n........\n........\n",
 ];
 
 export const hackathons = [
   {
-    title: "Upcoming Hackathon",
-    detail: "A placeholder entry for upcoming hackathon plans.",
-    icon: Sparkles,
+    title: "CodeFest 2026",
+    detail:
+      "Nepal largest hackathon, organized by CodeFest. Built a hardware and software solution for confedenciality.",
+    icon: Blocks,
+  },
+  {
+    title: "Havard Health Hackathon 2026",
+    detail:
+      "Solved a real-world problem related to healthcare using innovative technology solutions.",
+    icon: Blocks,
+  },
+  {
+    title: "Nepal Startup Innovation Hackathon 2026",
+    detail:
+      "Created a mobile app that utilized machine learning algorithms to provide ambulance services in real-time, improving emergency response times.",
+    icon: Blocks,
+  },
+  {
+    title: "Code for Change 2025",
+    detail:
+      "Developed a web application that streamlined the process of connecting local businesses with potential customers.",
+    icon: Blocks,
   },
 ];
 
 export const githubHighlights = [
-  { label: "Pinned repos", value: "8+" },
-  { label: "Contributions", value: "300+" },
-  { label: "Focus", value: "AI / Web3" },
+  { label: "Contributions", value: "5+" },
+  { label: "Repositories", value: "10+" },
 ];
 
 export const socialLinks = [
-  { label: "GitHub", href: "https://github.com/", icon: GithubIcon },
-  { label: "LinkedIn", href: "https://linkedin.com/", icon: LinkedinIcon },
-  { label: "X", href: "https://x.com/", icon: XIcon },
+  {
+    label: "GitHub",
+    href: "https://github.com/Tapraj-Pathak",
+    icon: GithubIcon,
+  },
+  {
+    label: "LinkedIn",
+    href: "https://linkedin.com/in/tapraj-pathak-22677a348/",
+    icon: LinkedinIcon,
+  },
+  { label: "X", href: "https://x.com/PathakTapraj", icon: XIcon },
 ];
 
 export const commands = [

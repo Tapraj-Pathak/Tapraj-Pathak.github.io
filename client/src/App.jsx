@@ -607,7 +607,7 @@ const App = () => {
                   </h2>
                 </div>
                 <a
-                  href="https://github.com/"
+                  href="https://github.com/Tapraj-Pathak"
                   className="inline-flex items-center gap-2 rounded-full border border-zinc-300 px-4 py-2 text-sm font-medium text-zinc-700 transition hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-900"
                 >
                   <GithubIcon size={16} /> Explore GitHub
@@ -734,13 +734,13 @@ const App = () => {
                     </button>
                   </div>
                   <a
-                    href="https://github.com/"
+                    href="https://github.com/Tapraj-Pathak"
                     className="flex items-center gap-3 rounded-2xl border border-zinc-200/70 px-4 py-3 transition hover:bg-zinc-50 dark:border-zinc-800 dark:hover:bg-zinc-900"
                   >
                     <GithubIcon size={16} /> GitHub
                   </a>
                   <a
-                    href="https://linkedin.com/"
+                    href="https://linkedin.com/in/tapraj-pathak-22677a348/"
                     className="flex items-center gap-3 rounded-2xl border border-zinc-200/70 px-4 py-3 transition hover:bg-zinc-50 dark:border-zinc-800 dark:hover:bg-zinc-900"
                   >
                     <LinkedinIcon size={16} /> LinkedIn
