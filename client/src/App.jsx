@@ -20,6 +20,7 @@ import ScrollProgress from "./components/ScrollProgress";
 import BackToTop from "./components/BackToTop";
 import CommandPalette from "./components/CommandPalette";
 import BootTerminal from "./components/BootTerminal";
+import ProjectUnavailable from "./components/ProjectUnavailable";
 import { GithubIcon, LinkedinIcon } from "./components/BrandIcons";
 import {
   commands,
@@ -48,6 +49,7 @@ const App = () => {
   const [backToTopVisible, setBackToTopVisible] = useState(false);
   const [terminalIndex, setTerminalIndex] = useState(0);
   const [terminalInput, setTerminalInput] = useState("");
+  const [selectedProject, setSelectedProject] = useState(null);
   const [contactForm, setContactForm] = useState({
     name: "",
     email: "",
@@ -199,6 +201,15 @@ const App = () => {
       setContactFeedback(error.message || "Message could not be sent.");
     }
   };
+
+  if (selectedProject) {
+    return (
+      <ProjectUnavailable
+        project={selectedProject}
+        onBack={() => setSelectedProject(null)}
+      />
+    );
+  }
 
   return (
     <div>
@@ -506,12 +517,22 @@ const App = () => {
                       >
                         <GithubIcon size={16} /> GitHub
                       </a>
-                      <a
-                        href={project.demo}
-                        className="inline-flex items-center gap-2 rounded-full bg-zinc-950 px-4 py-2 text-sm font-medium text-white transition hover:bg-zinc-800 dark:bg-white dark:text-zinc-950 dark:hover:bg-zinc-200"
-                      >
-                        <MonitorPlay size={16} /> Live Demo
-                      </a>
+                      {project.demo && project.demo !== "#" ? (
+                        <a
+                          href={project.demo}
+                          className="cursor-pointer inline-flex items-center gap-2 rounded-full bg-zinc-950 px-4 py-2 text-sm font-medium text-white transition hover:bg-zinc-800 dark:bg-white dark:text-zinc-950 dark:hover:bg-zinc-200"
+                        >
+                          <MonitorPlay size={16} /> Live Demo
+                        </a>
+                      ) : (
+                        <button
+                          type="button"
+                          onClick={() => setSelectedProject(project)}
+                          className="cursor-pointer inline-flex items-center gap-2 rounded-full bg-zinc-950 px-4 py-2 text-sm font-medium text-white transition hover:bg-zinc-800 dark:bg-white dark:text-zinc-950 dark:hover:bg-zinc-200"
+                        >
+                          <MonitorPlay size={16} /> Live Demo
+                        </button>
+                      )}
                     </div>
                   </div>
                 </motion.article>
