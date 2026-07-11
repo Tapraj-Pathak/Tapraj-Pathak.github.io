@@ -48,6 +48,10 @@ const App = () => {
   const [paletteOpen, setPaletteOpen] = useState(false);
   const [backToTopVisible, setBackToTopVisible] = useState(false);
   const [terminalIndex, setTerminalIndex] = useState(0);
+  const [terminalOutput, setTerminalOutput] = useState(
+    initialTerminalOutput[0],
+  );
+  const [manualTerminalOutput, setManualTerminalOutput] = useState(false);
   const [terminalInput, setTerminalInput] = useState("");
   const [selectedProject, setSelectedProject] = useState(null);
   const [contactForm, setContactForm] = useState({
@@ -110,11 +114,19 @@ const App = () => {
   }, []);
 
   useEffect(() => {
+    if (manualTerminalOutput) return;
+
     const interval = setInterval(() => {
       setTerminalIndex((value) => (value + 1) % initialTerminalOutput.length);
     }, 3200);
     return () => clearInterval(interval);
-  }, []);
+  }, [manualTerminalOutput]);
+
+  useEffect(() => {
+    if (!manualTerminalOutput) {
+      setTerminalOutput(initialTerminalOutput[terminalIndex]);
+    }
+  }, [terminalIndex, manualTerminalOutput]);
 
   useEffect(() => {
     const root = document.documentElement;
@@ -123,7 +135,7 @@ const App = () => {
     window.localStorage.setItem("theme", isDarkMode ? "dark" : "light");
   }, [isDarkMode]);
 
-  const currentTerminal = initialTerminalOutput[terminalIndex];
+  const currentTerminal = terminalOutput;
   const contactEmail =
     import.meta.env.VITE_CONTACT_EMAIL || "taprajpathak111@gmail.com";
   const heroStats = useMemo(
@@ -143,30 +155,73 @@ const App = () => {
     }
   };
 
-  const handleCommand = (event) => {
-    event.preventDefault();
-    const command = terminalInput.trim().toLowerCase();
-    if (!command) return;
+  const runTerminalCommand = (command) => {
+    const normalized = command.trim().toLowerCase();
 
-    if (command === "whoami") {
-      setTerminalInput("");
-      setTerminalIndex(0);
+    if (normalized === "whoami") {
+      setTerminalOutput(initialTerminalOutput[0]);
+      setManualTerminalOutput(true);
       return;
     }
-    if (command === "projects") {
+
+    if (normalized === "projects" || normalized === "ls projects") {
+      setTerminalOutput({
+        label: "ls projects",
+        value:
+          "tapraj-pathak.me\nChattenger\nSmart Saauji\nQueueZero\nKyc-quality-dector",
+      });
+      setManualTerminalOutput(true);
       document
         .getElementById("projects")
         ?.scrollIntoView({ behavior: "smooth", block: "start" });
-      setTerminalInput("");
       return;
     }
-    if (command === "contact") {
+
+    if (normalized === "skills") {
+      setTerminalOutput({
+        label: "skills",
+        value:
+          "JavaScript, Python, C++, React, Node.js, Express.js, MongoDB, Tailwind CSS, Socket.IO",
+      });
+      setManualTerminalOutput(true);
+      return;
+    }
+
+    if (normalized === "education") {
+      setTerminalOutput({
+        label: "education",
+        value:
+          "Schooling: Sadhana Path Academy\n11th & 12th: National Academy of Science and Technology\nCurrent: BE Computer at National College of Engineering (Tribhuvan University)",
+      });
+      setManualTerminalOutput(true);
+      return;
+    }
+
+    if (normalized === "contact") {
+      setTerminalOutput({
+        label: "contact",
+        value: "Opening contact section...",
+      });
+      setManualTerminalOutput(true);
       document
         .getElementById("contact")
         ?.scrollIntoView({ behavior: "smooth", block: "start" });
-      setTerminalInput("");
       return;
     }
+
+    setTerminalOutput({
+      label: normalized,
+      value:
+        "Command not found. Try whoami, skills, projects, education, or contact.",
+    });
+    setManualTerminalOutput(true);
+  };
+
+  const handleCommand = (event) => {
+    event.preventDefault();
+    if (!terminalInput.trim()) return;
+
+    runTerminalCommand(terminalInput);
     setTerminalInput("");
   };
 
@@ -694,9 +749,13 @@ const App = () => {
                             {item.description}
                           </p>
                         </div>
-                        <span className="text-xs uppercase tracking-[0.3em] text-zinc-500">
+                        <button
+                          type="button"
+                          onClick={() => runTerminalCommand(item.command)}
+                          className="cursor-pointer rounded-full bg-zinc-950 px-4 py-2 text-xs uppercase tracking-[0.3em] text-white transition hover:bg-zinc-800 dark:bg-white dark:text-zinc-950 dark:hover:bg-zinc-200"
+                        >
                           run
-                        </span>
+                        </button>
                       </div>
                     ))}
                   </div>

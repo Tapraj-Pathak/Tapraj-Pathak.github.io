@@ -62,7 +62,7 @@ export const projects = [
     status: "Live",
     github: "https://github.com/Tapraj-Pathak/Tapraj-Pathak.github.io",
     demo: "/",
-    accent: "from-slate-500/30 to-slate-600/20",
+    accent: "from-cyan-500/30 to-slate-600/20",
   },
   {
     title: "Chat Application",
@@ -71,7 +71,7 @@ export const projects = [
     status: "Live soon",
     github: "https://github.com/Tapraj-Pathak/Chat-App",
     demo: "#",
-    accent: "from-slate-500/30 to-slate-600/20",
+    accent: "from-rose-500/30 to-orange-400/20",
   },
   {
     title: "Smart Saauji",
@@ -80,7 +80,7 @@ export const projects = [
     status: "In Progress",
     github: "https://github.com/Tapraj-Pathak/Smart-saauji",
     demo: "#",
-    accent: "from-slate-500/30 to-slate-600/20",
+    accent: "from-violet-500/30 to-fuchsia-400/20",
   },
   {
     title: "Queue Zero",
@@ -89,7 +89,7 @@ export const projects = [
     status: "Live soon",
     github: "https://github.com/Tapraj-Pathak/Queue-Zero",
     demo: "#",
-    accent: "from-slate-500/30 to-slate-600/20",
+    accent: "from-emerald-500/30 to-cyan-400/20",
   },
   {
     title: "Kyc Verification System",
@@ -105,13 +105,14 @@ export const projects = [
     status: "Live soon",
     github: "https://github.com/Tapraj-Pathak/Kyc-Verification-System",
     demo: "#",
-    accent: "from-slate-500/30 to-slate-600/20",
+    accent: "from-amber-500/30 to-rose-400/20",
   },
 ];
 
 export const timeline = [
-  "2025 - Present: Pursuing Bachelor's in Computer Science at Tribhuvan University",
-  "I will write it later....\n......\n........\n........\n........\n........\n........\n........\n........\n........\n........\n........\n........\n........\n........\n........\n........\n........\n........\n........\n........\n........\n........\n........\n........\n........\n........\n",
+  "2010 - 2022: Schooling at Sadhana Path Academy",
+  "2022 - 2024: 11th and 12th at National Academy of Science and Technology",
+  "2025 - Present: BE Computer at National College of Engineering, affiliated to Tribhuvan University",
 ];
 
 export const hackathons = [

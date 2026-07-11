@@ -3,7 +3,7 @@ import { ArrowLeft, SearchX } from "lucide-react";
 const ProjectUnavailable = ({ project, onBack }) => {
   return (
     <div className="flex min-h-screen items-center justify-center bg-[radial-gradient(circle_at_top_left,rgba(34,211,238,0.16),transparent_26%),radial-gradient(circle_at_top_right,rgba(168,85,247,0.16),transparent_28%),linear-gradient(120deg,#f7f7f7_0%,#f3f4f6_100%)] px-6 py-10 text-zinc-800 dark:bg-[radial-gradient(circle_at_top_left,rgba(34,211,238,0.14),transparent_24%),radial-gradient(circle_at_top_right,rgba(168,85,247,0.14),transparent_24%),linear-gradient(120deg,#09090b_0%,#111113_100%)] dark:text-zinc-100">
-      <div className="w-full max-w-3xl rounded-[2rem] border border-rose-200/80 bg-white/80 p-8 shadow-[0_24px_80px_rgba(2,8,23,0.08)] backdrop-blur dark:border-rose-900/60 dark:bg-zinc-950/80">
+      <div className="w-full max-w-3xl rounded-4xl border border-rose-200/80 bg-white/80 p-8 shadow-[0_24px_80px_rgba(2,8,23,0.08)] backdrop-blur dark:border-rose-900/60 dark:bg-zinc-950/80">
         <div className="flex items-center gap-2">
           <div className="rounded-full bg-rose-500/10 p-2 text-rose-600 dark:text-rose-300">
             <SearchX size={18} />
