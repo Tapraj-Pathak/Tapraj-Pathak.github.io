@@ -22,6 +22,7 @@ import CommandPalette from "./components/CommandPalette";
 import BootTerminal from "./components/BootTerminal";
 import ProjectUnavailable from "./components/ProjectUnavailable";
 import { GithubIcon, LinkedinIcon } from "./components/BrandIcons";
+import api from "./service/axios";
 import {
   commands,
   hackathons,
@@ -236,24 +237,20 @@ const App = () => {
     setContactFeedback("");
 
     try {
-      const apiBaseUrl = import.meta.env.VITE_API_URL || "";
-      const response = await fetch(`${apiBaseUrl}/api/contact`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(contactForm),
-      });
-      const data = await response.json().catch(() => ({}));
-
-      if (!response.ok) {
-        throw new Error(data.message || "Message could not be sent.");
-      }
+      const { data } = await api.post("/contact", contactForm);
 
       setContactStatus("success");
-      setContactFeedback("Message sent. I will get back to you soon.");
+      setContactFeedback(
+        data.message || "Message sent. I will get back to you soon.",
+      );
       setContactForm({ name: "", email: "", message: "" });
     } catch (error) {
+      const message =
+        error.response?.data?.message ||
+        error.message ||
+        "Message could not be sent.";
       setContactStatus("error");
-      setContactFeedback(error.message || "Message could not be sent.");
+      setContactFeedback(message);
     }
   };
 

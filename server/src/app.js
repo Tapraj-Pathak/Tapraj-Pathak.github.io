@@ -6,6 +6,7 @@ import morgan from "morgan";
 import { env } from "./config/env.js";
 import { errorHandler, notFound } from "./middleware/errorHandler.js";
 import contactRoutes from "./routes/contact.routes.js";
+import path from "path";
 
 const app = express();
 
@@ -34,6 +35,13 @@ app.use(
 app.get("/api/health", (req, res) => {
   res.json({ status: "ok" });
 });
+
+if(process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(process.cwd(), "client/dist")));
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(process.cwd(), "client/dist/index.html"));
+  });
+}
 
 app.use(notFound);
 app.use(errorHandler);

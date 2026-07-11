@@ -1,0 +1,13 @@
+{
+  "name": "tapraj-pathak.github.io",
+  "version": "1.0.0",
+  "description": "A modern personal portfolio website for Tapraj Pathak, built with React and Vite on the client side and an Express-based API on the server side. The site includes an interactive terminal-inspired hero section, project highlights, social links, and a working contact form.",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm install --prefix client && npm run build --prefix client && npm install --prefix server",
+    "start": "npm run start --prefix server"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
