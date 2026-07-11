@@ -133,9 +133,49 @@ Then open the local frontend URL shown by Vite, usually http://localhost:5173.
 
 ## Deployment Notes
 
-- The client can be deployed on Vercel, Netlify, or GitHub Pages
-- The server API can be deployed on Render, Railway, or similar Node.js hosting providers
-- Make sure the production frontend URL is set in the server environment variables
+### Recommended production setup
+
+- Host the frontend on Vercel or Netlify
+- Host the backend API on Render
+- Use a custom domain such as tapraj.me
+
+### Production environment variables
+
+Set these in your hosting provider for the backend:
+
+```env
+NODE_ENV=production
+PORT=10000
+CLIENT_URL=https://tapraj.me
+ALLOWED_ORIGINS=https://tapraj.me
+MONGODB_URI=your_mongodb_connection_string
+PRIMARY_EMAIL=your_primary_email
+SECONDARY_EMAIL=your_secondary_email
+SMTP_HOST=smtp.example.com
+SMTP_PORT=587
+SMTP_SECURE=false
+SMTP_USER=your_smtp_username
+SMTP_PASS=your_smtp_password
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_api_key
+CLOUDINARY_API_SECRET=your_api_secret
+ALLOW_VISITOR_FROM=false
+```
+
+### Frontend API URL
+
+In the frontend deployment environment, set:
+
+```env
+VITE_API_URL=https://your-api-domain.onrender.com/api
+```
+
+### Custom domain
+
+1. Point your .me domain to your hosting provider's DNS settings.
+2. Add the domain in Vercel or Netlify.
+3. Add the same domain as the frontend URL in your backend environment variables.
+4. If you use Render, set the backend URL and then update the frontend API variable.
 
 ## License
 

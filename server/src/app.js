@@ -3,18 +3,32 @@ import express from "express";
 import rateLimit from "express-rate-limit";
 import helmet from "helmet";
 import morgan from "morgan";
+import path from "path";
+import { fileURLToPath } from "url";
 import { env } from "./config/env.js";
 import { errorHandler, notFound } from "./middleware/errorHandler.js";
 import contactRoutes from "./routes/contact.routes.js";
-import path from "path";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const repoRoot = path.resolve(__dirname, "..", "..");
+const clientDistPath = path.join(repoRoot, "client", "dist");
 
 const app = express();
 
 app.use(helmet());
 app.use(
   cors({
-    origin: env.clientUrl,
+    origin: (origin, callback) => {
+      if (!origin || env.allowedOrigins.includes(origin)) {
+        callback(null, true);
+        return;
+      }
+
+      callback(new Error("Not allowed by CORS"));
+    },
     methods: ["GET", "POST"],
+    credentials: true,
   }),
 );
 app.use(express.json({ limit: "32kb" }));
@@ -36,10 +50,10 @@ app.get("/api/health", (req, res) => {
   res.json({ status: "ok" });
 });
 
-if(process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(process.cwd(), "client/dist")));
+if (env.nodeEnv === "production") {
+  app.use(express.static(clientDistPath));
   app.get("*", (req, res) => {
-    res.sendFile(path.join(process.cwd(), "client/dist/index.html"));
+    res.sendFile(path.join(clientDistPath, "index.html"));
   });
 }
 

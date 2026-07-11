@@ -1,0 +1,41 @@
+services:
+  - type: web
+    name: tapraj-portfolio-api
+    env: node
+    plan: free
+    buildCommand: |
+      npm install --prefix client
+      npm run build --prefix client
+      npm install --prefix server
+    startCommand: npm run start --prefix server
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: CLIENT_URL
+        value: https://tapraj.me
+      - key: ALLOWED_ORIGINS
+        value: https://tapraj.me
+      - key: MONGODB_URI
+        sync: false
+      - key: PRIMARY_EMAIL
+        sync: false
+      - key: SECONDARY_EMAIL
+        sync: false
+      - key: SMTP_HOST
+        sync: false
+      - key: SMTP_PORT
+        value: 587
+      - key: SMTP_SECURE
+        value: false
+      - key: SMTP_USER
+        sync: false
+      - key: SMTP_PASS
+        sync: false
+      - key: CLOUDINARY_CLOUD_NAME
+        sync: false
+      - key: CLOUDINARY_API_KEY
+        sync: false
+      - key: CLOUDINARY_API_SECRET
+        sync: false

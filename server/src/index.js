@@ -6,8 +6,8 @@ const startServer = async () => {
   try {
     await connectDb();
 
-    app.listen(env.port, () => {
-      console.log(`API running on http://localhost:${env.port}`);
+    app.listen(env.port, "0.0.0.0", () => {
+      console.log(`API running on http://0.0.0.0:${env.port}`);
     });
   } catch (error) {
     console.error("Failed to start API:", error.message);
