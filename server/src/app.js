@@ -1,14 +1,19 @@
+import { existsSync } from "fs";
 import cors from "cors";
 import express from "express";
 import rateLimit from "express-rate-limit";
 import helmet from "helmet";
 import morgan from "morgan";
+import path from "path";
+import { fileURLToPath } from "url";
 import { env } from "./config/env.js";
 import { errorHandler, notFound } from "./middleware/errorHandler.js";
 import contactRoutes from "./routes/contact.routes.js";
-import path from "path";
 
 const app = express();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const clientDistPath = path.resolve(__dirname, "../../client/dist");
 
 app.use(helmet());
 app.use(
@@ -36,10 +41,10 @@ app.get("/api/health", (req, res) => {
   res.json({ status: "ok" });
 });
 
-if(process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(process.cwd(), "client/dist")));
+if (existsSync(clientDistPath)) {
+  app.use(express.static(clientDistPath));
   app.get("*", (req, res) => {
-    res.sendFile(path.join(process.cwd(), "client/dist/index.html"));
+    res.sendFile(path.join(clientDistPath, "index.html"));
   });
 }
 
